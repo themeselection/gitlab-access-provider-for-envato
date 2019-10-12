@@ -35,10 +35,45 @@ Your API should have below api endpoints to make api call for reading and adding
  * URL: `<requests_api_endpoint_defined_in_config>?purchase_code=<code_to_varify>`
  * Response: List of objects
  * Required Methods: GET & POST
+ 
+```js
+// Get Response if exists
+[{
+    "id": 13,
+    "email": "jdsolanki0001@gmail.com",
+    "purchase_code": "4a18ab18-5e3e-4580-a4b8-7f477d91652c",
+    "username": "jdsolanki0001",
+    "product_id":
+    {
+        "id": 5,
+        "name": "Vusax - Vuejs + HTML Admin Dashboard Template",
+        "envato_id": 23328599,
+        "gitlab_project_id": 8641662,
+        "created_at": "2019-09-12T06:39:18.103Z",
+        "updated_at": "2019-09-12T06:39:18.103Z"
+    },
+    "created_at": "2019-09-16T14:22:02.981Z",
+    "updated_at": "2019-10-12T09:17:42.089Z"
+}]
+
+// If doesn't exist
+[]
+```
 
 2. Fetch Products:
  * URL: `<products_api_endpoint_defined_in_config>`
  * Required Methods: GET
+```js
+[{
+    "id": 1,
+    "name": "Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template",
+    "envato_id": 23328599,
+    "gitlab_project_id": 8641662,
+    "created_at": "2019-09-12T06:39:18.103Z",
+    "updated_at": "2019-09-12T06:39:18.103Z"
+},
+...]
+```
 
 
 ## How to Setup :thinking:

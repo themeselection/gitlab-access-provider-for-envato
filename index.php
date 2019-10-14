@@ -273,6 +273,7 @@ function show_field_data($field) {
         const purchase_code  = form_data.get("purchase_code")
         const username       = form_data.get("username")
         const requested_repo = form_data.get("requested_repo")
+        const product_id     = form_data.get("product_id")
 
         if(!email) { error_obj.email = "Email Field is Required!" }
         else if(!email_regex.test(email)) { error_obj.email = "Email is not valid!" }
@@ -280,6 +281,7 @@ function show_field_data($field) {
         if(!purchase_code)  { error_obj.purchase_code  = "Purchase Code Field is Required!" }
         if(!username)       { error_obj.username       = "Username Field is Required!"      }
         if(!requested_repo) { error_obj.requested_repo = "Repository is not selected!"      }
+        if(!product_id)     { error_obj.product_id     = "Repository is not selected!"      }
 
         Object.keys(error_obj).length === 0 ? toggleLoading() : displayErrors()        
 

@@ -1,8 +1,7 @@
 <?php
 
 session_start();
-
-$config = json_decode(file_get_contents("./config.json"), true);
+include_once("./config.php");
 
 // ///////////////////////////////////////////////////////
 // VARIABLES
@@ -212,14 +211,13 @@ function handle_validate_purchase_code_response($response) {
 
   global $internal_err;
 
-
   if($response["status"] !== 200) {
 
     // If error exist
     if($response["status"] === 404) {
         set_field_error("purchase_code", "Invalid Purchase Code!");
     }else {
-        set_field_error("purchase_code", $response["result"]["error"]);
+        set_field_error("purchase_code", json_decode(json_encode($response["result"]), true)["error"]);
         show_err($internal_err);
     }
 

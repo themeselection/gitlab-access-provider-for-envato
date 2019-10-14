@@ -1,9 +1,7 @@
 <?php
 
 session_start();
-// session_destroy();
-
-$config = json_decode(file_get_contents("./config.json"), true);
+include_once("./config.php");
 
 function clear_error($field) {
   unset($_SESSION["form-error"][$field]);
@@ -139,7 +137,6 @@ function show_field_data($field) {
     <script>
       let products  = []
       let error_obj = {}
-      let config    = null
 
       const custom_select        = document.querySelector(".custom-select")
       const select_options_ul    = document.querySelector(".select-options")
@@ -149,18 +146,19 @@ function show_field_data($field) {
       const loading_bg = document.querySelector(".loading-bg")
       const loading    = document.querySelector(".loading")
 
-      fetch_config(load_config)
+      fetch_products(load_products)
 
       custom_select.addEventListener("click", toggle_select_options)
 
-      function fetch_config(callback) {
+      function fetch_products(callback) {
         const xhr = new XMLHttpRequest()
         xhr.overrideMimeType("application/json")
-        xhr.open('GET', 'config.json', true)
+        xhr.open('GET', 'get-products.php', true)
         xhr.onreadystatechange = function() {
           if (xhr.readyState === 4) {
             if(xhr.status === 200) {
-              callback(JSON.parse(xhr.responseText))
+              products = JSON.parse(xhr.responseText).length ? JSON.parse(JSON.parse(xhr.responseText)) : []
+              callback()
             }else {
               error_obj.requested_repo = "Error loading configurations!"
               error_obj.global = "Oops! There was error while displaying form. Please report us with received error message."
@@ -172,33 +170,14 @@ function show_field_data($field) {
         xhr.send(null)
       }
 
-      function load_config(json) {
-        config = json
-        load_products()
-      }
-
       function load_products() {
-
-        fetch(config.api.products)
-          .then((response) => response.json())
-          .then(function(response) {
-
-            if(response.length !== 0) {
-              products = response
-              render_products()
-              // toggleLoading(false)
-            }else {
-              error_obj.requested_repo = "Error Fetching products details!"
-              error_obj.global = config.messages.global_error
-              displayErrors()
-            }
-          })
-          .catch(function(err) {
-            // console.log(JSON.parse(xhr.responseText).message)
-            error_obj.requested_repo = "Error Fetching products details!"
-            error_obj.global = config.messages.global_error
-            displayErrors()
-          })
+        if(products.length !== 0) {
+          render_products()
+        }else {
+          error_obj.requested_repo = "Error Fetching products details!"
+          error_obj.global = "Oops! There was error while displaying form. Please report us with received error message."
+          displayErrors()
+        }
       }
 
       // /////////////////////////////////////////////////////////////

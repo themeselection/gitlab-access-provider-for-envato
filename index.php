@@ -90,6 +90,7 @@ function show_field_data($field) {
                   <div class="form-group">
                       <label for="requested_repo" class="text-muted">GitLab Repository<span class="text-danger">*</span></label>
                       <input type="hidden" name="requested_repo" id="input-requested-repo" required />
+                      <input type="hidden" name="product_id" id="input-product-id" required />
                       <div class="custom-select">
                           <p class="text-muted" id="custom-select-placeholder">Select Option</p>
                           <ul class="select-options"></ul>
@@ -143,6 +144,7 @@ function show_field_data($field) {
       const custom_select        = document.querySelector(".custom-select")
       const select_options_ul    = document.querySelector(".select-options")
       const requested_repo_input = document.getElementById("input-requested-repo")
+      const product_id_input     = document.getElementById("input-product-id")
 
       const loading_bg = document.querySelector(".loading-bg")
       const loading    = document.querySelector(".loading")
@@ -207,7 +209,8 @@ function show_field_data($field) {
         for(i=0;i<products.length;i++) {
           li_ele = document.createElement('li')
           li_ele.innerHTML = products[i].name
-          li_ele.setAttribute("data-id", products[i].envato_id)
+          li_ele.setAttribute("data-id", products[i].id)
+          li_ele.setAttribute("data-envato-id", products[i].envato_id)
           li_ele.addEventListener("click", select_option)
           select_options_ul.appendChild(li_ele)
         }
@@ -225,9 +228,13 @@ function show_field_data($field) {
         select_label.innerHTML = e.target.innerHTML
 
         // Set val in hidden field
-        const envato_id = e.target.getAttribute("data-id")
+        const envato_id = e.target.getAttribute("data-envato-id")
 
         requested_repo_input.setAttribute("value", envato_id)
+
+        // Set product_id input
+        const product_id = e.target.getAttribute("data-id")
+        product_id_input.setAttribute("value", product_id)
       }
 
       // /////////////////////////////////////////////////////////////

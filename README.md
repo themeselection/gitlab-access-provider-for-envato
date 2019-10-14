@@ -38,6 +38,7 @@ Your API should have below api endpoints to make api call for reading and adding
  
 ```js
 // Get Response if exists
+// Status Code: 200
 [{
     "id": 13,
     "email": "jdsolanki0001@gmail.com",
@@ -57,6 +58,7 @@ Your API should have below api endpoints to make api call for reading and adding
 }]
 
 // If doesn't exist
+// Status Code: 200
 []
 ```
 
@@ -64,6 +66,7 @@ Your API should have below api endpoints to make api call for reading and adding
  * URL: `<products_api_endpoint_defined_in_config>`
  * Required Methods: GET
 ```js
+// Status Code: 200
 [{
     "id": 1,
     "name": "Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template",

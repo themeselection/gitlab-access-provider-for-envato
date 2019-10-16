@@ -78,6 +78,22 @@ Your API should have below api endpoints to make api call for reading and adding
 ...]
 ```
 
+3. Fetch Product By Envato ID:
+ * URL: `<products_api_endpoint_defined_in_config>?envato_id=<envato_id_of_item>`
+ * Required Methods: GET
+```js
+// Status Code: 200
+// First item will be considered if multiple items are received
+[{
+    "id": 1,
+    "name": "Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template",
+    "envato_id": 23328599,
+    "gitlab_project_id": 8641662,
+    "created_at": "2019-09-12T06:39:18.103Z",
+    "updated_at": "2019-09-12T06:39:18.103Z"
+}]
+```
+
 
 ## How to Setup :thinking:
 Just update `config.json` file and your are done. `config.json` file is easy to understand and removes headache of going through whole code.
